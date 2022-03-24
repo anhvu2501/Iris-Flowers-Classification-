@@ -1,7 +1,4 @@
 # Based on https://github.com/Swarupa567/Iris-Flower-Classification-Project
-
-from enum import auto
-from math import gamma
 from pandas import read_csv # for reading csv files
 from pandas.plotting import scatter_matrix # for drawing a matrix of scatter plots
 from matplotlib import pyplot
