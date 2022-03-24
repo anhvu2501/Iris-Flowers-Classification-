@@ -70,12 +70,26 @@ X_train, X_validation, y_train, y_validation = train_test_split(X, y, test_size=
 
 # spot check algorithm
 models = []
+# model uses Logistic Regression (ovr is one vs rest ~ one vs all) as the learning algorithm
 models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
-models.append(('LDA', LinearDiscriminantAnalysis()))
+
+# model uses LDA as the learning algorithm (MUST LEARN)
+models.append(('LDA', LinearDiscriminantAnalysis())) 
+
+# model uses KNN as the learning algorithm (learned in DM I)
 models.append(('KNN', KNeighborsClassifier()))
+
+# model uses CART (decision tree) as the learning algorithm (learned in DM I)
 models.append(('CART', DecisionTreeClassifier()))
-models.append(('NB', GaussianNB()))
+
+# model uses Gaussian NB as the learning algorithm (MUST LEARN)
+models.append(('NB', GaussianNB())) 
+
+# model uses SVC (support vector machine) as the learning algorithm
 models.append(('SVM', SVC(gamma='auto')))
+
+# print('Models: ')
+# print(models)
 
 # evaluate each model in turn
 results = []
