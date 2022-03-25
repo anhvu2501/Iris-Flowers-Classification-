@@ -1,9 +1,8 @@
 # Based on https://github.com/Swarupa567/Iris-Flower-Classification-Project
+
 from pandas import read_csv # for reading csv files
 from pandas.plotting import scatter_matrix # for drawing a matrix of scatter plots
-from matplotlib import pyplot
-from scipy.sparse import data
-from scipy.sparse.construct import random # intended for interactive plots and simple cases of programmatic plot generation
+from matplotlib import pyplot # intended for interactive plots and simple cases of programmatic plot generation
 from sklearn.model_selection import train_test_split # for splitting arrays or matrices into random train and test subsets
 from sklearn.model_selection import cross_val_score # for evaluating a score by cross-validation
 from sklearn.model_selection import StratifiedKFold # provide train/test indices to split data in train/test sets
