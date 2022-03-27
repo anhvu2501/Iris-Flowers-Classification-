@@ -25,6 +25,8 @@ y = iris_data.target
 
 # Split data into train and test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Convert y_train and y_test into one-hot representation form
 y_train = keras.utils.to_categorical(y_train, 3)
 y_test = keras.utils.to_categorical(y_test, 3)
 
@@ -50,6 +52,11 @@ model.add(layers.Dense(3, activation='softmax'))
 # Compile the Model
 model.compile(optimizer=optimizers.Adam(learning_rate= 0.001), loss='categorical_crossentropy', metrics=['accuracy'])
 
+### NOTE
+# If we dont convert y_train and y_test into one-hot form. We can use sparese_categorical_crossentropy instead #
+# model.compile(optimizer=optimizers.Adam(learning_rate= 0.001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+
+
 # print(X_train.shape)
 # print(y_train.shape)
 
@@ -71,8 +78,9 @@ class_names = iris_data.target_names
 # Get the features for the first 5 test samples
 X_new = X_test[:5]
 # Predict the classes for those 5 samples
-y_pred = model.predict_classes(X_new)
-print(np.array(class_names)[y_pred])
+predict_x = model.predict(X_test) 
+classes_x = np.argmax(predict_x,axis=1)
+print(np.array(class_names)[classes_x])
 # Get the actual class names of the first 5 samples
 y_new = y_test[:5]
 print(np.array(class_names)[y_new])
