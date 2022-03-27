@@ -7,6 +7,7 @@ import pandas as pd
 from simplejson import load
 import tensorflow as tf
 from keras import backend
+from tensorflow import keras
 from tensorflow.keras import layers, models, optimizers
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
@@ -24,6 +25,8 @@ y = iris_data.target
 
 # Split data into train and test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+y_train = keras.utils.to_categorical(y_train, 3)
+y_test = keras.utils.to_categorical(y_test, 3)
 
 # Create the Model
 backend.clear_session() # Clear the Keras Backend
@@ -51,7 +54,7 @@ model.compile(optimizer=optimizers.Adam(learning_rate= 0.001), loss='categorical
 # print(y_train.shape)
 
 # Train the model
-history = model.fit(X_train, y_train, batch=5, epochs=100)
+history = model.fit(X_train, y_train, batch_size=5, epochs=100)
 
 # Once the training is complete, plot the loss and accuracy metrics of the model
 pd.DataFrame(history.history).plot(figsize=(8,5))
