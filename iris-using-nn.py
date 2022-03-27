@@ -1,22 +1,38 @@
 # Iris flower classification using Neural Networks 
 
-from email.charset import add_charset
-from unittest import result
 import numpy as np
 import pandas as pd
-from simplejson import load
 import tensorflow as tf
 from keras import backend
-from tensorflow import keras
-from tensorflow.keras import layers, models, optimizers
+from matplotlib import pyplot as plt
+from pandas import read_csv
+from simplejson import load
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
-from matplotlib import pyplot as plt
+from sklearn.preprocessing import LabelEncoder
+from tensorflow import keras
+from tensorflow.keras import layers, models, optimizers
 
-# Load data
+### Load data from sklearn (The data is already in the form the set of appropriate numbers)
 iris_data = load_iris()
 X = iris_data.data
 y = iris_data.target
+
+
+### Load raw data from kaggle. The data is not processed yet
+# url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
+# names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
+# dataset = read_csv(url, names=names)
+# array = dataset.values
+# X = array[:, 0:4] # take all values in each row from column 0 to 4 => input features 
+# y = array[:, 4]
+
+# # Process to encode the raw y into number representation of y
+# # And also need to convert X from type = 'Object' into type 'float'
+# X = X.astype(float)
+# label_encoder = LabelEncoder()
+# y = label_encoder.fit_transform(y)
+
 
 # This data is already converted to the set of numbers (float for X and integer for y) 
 # print(iris_data)
@@ -26,7 +42,7 @@ y = iris_data.target
 # Split data into train and test set
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
-# Convert y_train and y_test into one-hot representation form
+# Convert y_train and y_test into one-hot representation form (from integer number to one-hot)
 y_train = keras.utils.to_categorical(y_train, 3)
 y_test = keras.utils.to_categorical(y_test, 3)
 
